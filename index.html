@@ -126,14 +126,34 @@
       padding: 15px;
       margin-top: 30px;
     }
+    .send-btn {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.send-btn:hover {
+  background-color: #1e669b;
+}
+
   </style>
 </head>
 <body>
   <header>
-    <h1>المعاذ للأدوات الكهربائية</h1>
-    <div id="cart-counter">السلة: 0</div>
+  <h1>المعاز للأدوات الكهربائية</h1>
     <p>كل ما تحتاجه من أدوات كهربائية في مكان واحد</p>
-  </header>
+  <div id="cart-counter">السلة: 0</div>
+  <section class="cart-section" style="background:none; border:none; padding:0;">
+    <ul class="cart-items" id="cart-items"></ul>
+    <p class="total" id="total-price">الإجمالي: 0 جنيه</p>
+    <button class="clear-btn" onclick="clearCart()">إفراغ السلة</button>
+    <button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
+  </section>
+</header>
+
 
   <section class="products">
     <div class="product">
@@ -226,15 +246,6 @@
       <button onclick="addToCart(' فيشة نتاسة ilock', 30)">أضف إلى السلة</button>
     </div>
 
-  </section>
-
-  <section class="cart-section">
-    <h2>محتويات السلة</h2>
-    <ul class="cart-items" id="cart-items"></ul>
-    <p class="total" id="total-price">الإجمالي: 0 جنيه</p>
-    <button class="clear-btn" onclick="clearCart()">إفراغ السلة</button>
-  </section>
-
   <footer>
     <p> المعاذ | للتواصل : 01223315702 | 01144355538</p>
     <p>تصميم معاذ بهاء البدوي</p>
@@ -274,6 +285,26 @@
     localStorage.removeItem("cart");
     updateCartUI();
   }
+  function sendOrder() {
+  if (cart.length === 0) {
+    alert("السلة فارغة!");
+    return;
+  }
+
+  let message = "طلب جديد من العميل:\n";
+  cart.forEach(item => {
+    message += `- ${item.name} (${item.price} جنيه)\n`;
+  });
+
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+  message += `\nالإجمالي: ${total} جنيه`;
+
+  // فتح واتساب
+  let phone = "201228408475"; // ← غيّر الرقم لرقمك (بدون +)
+  let url = `https://wa.me/${201228408475}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
 
   window.onload = updateCartUI;
 </script>
