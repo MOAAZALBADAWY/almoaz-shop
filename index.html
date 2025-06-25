@@ -308,13 +308,28 @@
     return;
   }
 
-  let message = "طلب جديد من العميل:\n";
+  // نجمع المنتجات المتكررة
+  let itemsMap = {};
   cart.forEach(item => {
-    message += `- ${item.name} (${item.price} جنيه)\n`;
+    if (itemsMap[item.name]) {
+      itemsMap[item.name].count++;
+    } else {
+      itemsMap[item.name] = {
+        count: 1,
+        price: item.price
+      };
+    }
   });
+
+  let message = "طلب جديد من العميل:\n";
+  for (let name in itemsMap) {
+    let entry = itemsMap[name];
+    message += `- ${entry.count} × ${name} (${entry.price} جنيه)\n`;
+  }
 
   let total = cart.reduce((sum, item) => sum + item.price, 0);
   message += `\nالإجمالي: ${total} جنيه`;
+      
 
   // فتح واتساب
   let phone = "201228408475"; // ← غيّر الرقم لرقمك (بدون +)
