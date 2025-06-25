@@ -187,6 +187,18 @@ html {
 </head>
 <body>
   <header>
+    <div style="margin: 20px auto 0 20px; width: fit-content;">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="ابحث عن منتج..."
+    style="padding: 10px; width: 250px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"
+    oninput="searchProducts()"
+  />
+</div>
+
+</div>
+
   
   <div id="cart-counter" onclick="toggleCart()">السلة: 0</div>
   <section class="cart-section">
@@ -244,6 +256,13 @@ html {
       <h3>لقمة جرس بتشينو</h3>
       <p>سعر: 15 جنيه</p>
       <button onclick="addToCart('لقمة جرس  بتشينو', 15)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download0147.jpg" alt="لمبة LED">
+      <h3>شاسية فينوس</h3>
+      <p>سعر: 13 جنيه</p>
+      <button onclick="addToCart('شاسية فينوس', 13)">أضف إلى السلة</button>
     </div>
 
      <div class="product">
@@ -394,23 +413,39 @@ html {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   function updateCartUI() {
-    const cartItems = document.getElementById("cart-items");
-    const totalPrice = document.getElementById("total-price");
-    const counter = document.getElementById("cart-counter");
+  const cartItems = document.getElementById("cart-items");
+  const totalPrice = document.getElementById("total-price");
+  const counter = document.getElementById("cart-counter");
 
-    cartItems.innerHTML = "";
-    let total = 0;
+  cartItems.innerHTML = "";
+  let total = 0;
 
-    cart.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = `${item.name} - ${item.price} جنيه`;
-      cartItems.appendChild(li);
-      total += item.price;
-    });
+  // إنشاء خريطة للمنتجات المتكررة
+  let itemsMap = {};
+  cart.forEach(item => {
+    if (itemsMap[item.name]) {
+      itemsMap[item.name].count++;
+    } else {
+      itemsMap[item.name] = {
+        count: 1,
+        price: item.price
+      };
+    }
+    total += item.price;
+  });
 
-    totalPrice.textContent = `الإجمالي: ${total} جنيه`;
-    counter.textContent = `السلة: ${cart.length}`;
+  // عرض المنتجات بعد التجميع
+  for (let name in itemsMap) {
+    const li = document.createElement("li");
+    let entry = itemsMap[name];
+    li.textContent = `${entry.count} × ${name} - ${entry.price * entry.count} جنيه`;
+    cartItems.appendChild(li);
   }
+
+  totalPrice.textContent = `الإجمالي: ${total} جنيه`;
+  counter.textContent = `السلة: ${cart.length}`;
+}
+
 
   function addToCart(name, price) {
     cart.push({ name, price });
@@ -467,4 +502,19 @@ html {
 
 
   window.onload = updateCartUI;
+
+  function searchProducts() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const productElements = document.querySelectorAll(".product");
+
+  productElements.forEach(product => {
+    const name = product.querySelector("h3").textContent.toLowerCase();
+    if (name.includes(input)) {
+      product.style.display = "block";
+    } else {
+      product.style.display = "none";
+    }
+  });
+}
+
 </script>
