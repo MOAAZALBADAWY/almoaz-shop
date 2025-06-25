@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لمبات - المعاذ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">🏠 الرئيسية</a></li>
+      <li><a href="lamps.html">💡 لمبات</a></li>
+      <li><a href="switches.html">🔌 مفاتيح</a></li>
+    </ul>
+  </nav>
+
+  <div id="cart-counter" onclick="toggleCart()">🛒 السلة: 0</div>
+  <section class="cart-section" id="cart-section">
+    <ul id="cart-items" class="cart-items"></ul>
+    <p class="total" id="total-price">الإجمالي: 0 جنيه</p>
+    <button class="clear-btn" onclick="clearCart()">إفراغ السلة</button>
+    <button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
+  </section>
+
+  <section class="products">
+    <!-- مثال على منتج -->
+    <div class="product">
+      <img src="lion 68.png" alt="لمبة ليد">
+      <h3>لمبة ليد ليون 68 وات</h3>
+      <p>سعر: 90 جنيه</p>
+      <button onclick="addToCart('لمبة ليد ليون 68 وات', 90)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="shopping.webp" alt="لمبة LED">
+      <h3>لمبة ليد فينوس 12 وات </h3>
+      <p>سعر: 75 جنيه</p>
+      <button onclick="addToCart('لمبة ليد فينوس 12 وات ', 75)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="shopping.webp" alt="لمبة LED">
+      <h3>لمبة ليد فينوس 9 وات </h3>
+      <p>سعر: 65 جنيه</p>
+      <button onclick="addToCart('لمبة ليد فينوس 9 وات ', 65)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download011.jpg" alt="لمبة LED">
+      <h3>لمبة ليد اسبرنت 9 وات </h3>
+      <p>سعر: 35 جنيه</p>
+      <button onclick="addToCart('لمبة ليد اسبرنت 9 وات ', 35)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download00.jpg" alt="لمبة LED">
+      <h3>لمبة ليد اليوس 12 وات </h3>
+      <p>سعر: 80 جنيه</p>
+      <button onclick="addToCart('لمبة ليد اليوس 12 وات', 80)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download00.jpg" alt="لمبة LED">
+      <h3>لمبة ليد اليوس 9 وات </h3>
+      <p>سعر: 65 جنيه</p>
+      <button onclick="addToCart('لمبة ليد اليوس 9 وات', 65)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="clicklen 9.png" alt="لمبة LED">
+      <h3>لمبة ليد كليكن 9 وات </h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('لمبة ليد كليكن 9 وات', 15)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="clicklen 12.png" alt="لمبة LED">
+      <h3>لمبة ليد كليكن 12 وات </h3>
+      <p>سعر: 20 جنيه</p>
+      <button onclick="addToCart('لمبة ليد كليكن 12 وات', 20)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="clicklen 35.png" alt="لمبة LED">
+      <h3>لمبة ليد كليكن 35 وات </h3>
+      <p>سعر: 45 جنيه</p>
+      <button onclick="addToCart('لمبة ليد كليكن 35 وات', 45)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="clicklen 45.png" alt="لمبة LED">
+      <h3>لمبة ليد كليكن 45 وات </h3>
+      <p>سعر: 60 جنيه</p>
+      <button onclick="addToCart('لمبة ليد كليكن 45 وات', 60)">أضف إلى السلة</button>
+    </div>
+
+     <div class="product">
+      <img src="images.jpg" alt="لمبة LED">
+      <h3>لمبة ليد كونايس 12 وات </h3>
+      <p>سعر: 40 جنيه</p>
+      <button onclick="addToCart('لمبة ليد كونايس 12 وات', 40)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="images.jpg" alt="لمبة LED">
+      <h3>لمبة ليد كونايس 16 وات </h3>
+      <p>سعر: 60 جنيه</p>
+      <button onclick="addToCart('لمبة ليد كونايس 16 وات', 60)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download012.jpg" alt="لمبة LED">
+      <h3>لمبة ليد كونايس 40 وات </h3>
+      <p>سعر: 120 جنيه</p>
+      <button onclick="addToCart('لمبة ليد كونايس 40 وات', 120)">أضف إلى السلة</button>
+    </div>
+
+
+    <!-- باقي اللمبات انسخها من كودك السابق -->
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

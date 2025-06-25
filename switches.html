@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>مفاتيح - المعاذ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ✅ شريط الأقسام -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">🏠 الرئيسية</a></li>
+      <li><a href="lamps.html">💡 لمبات</a></li>
+      <li><a href="switches.html">🔌 مفاتيح</a></li>
+    </ul>
+  </nav>
+
+  <!-- ✅ السلة -->
+  <div id="cart-counter" onclick="toggleCart()">🛒 السلة: 0</div>
+  <section class="cart-section" id="cart-section">
+    <ul id="cart-items" class="cart-items"></ul>
+    <p class="total" id="total-price">الإجمالي: 0 جنيه</p>
+    <button class="clear-btn" onclick="clearCart()">إفراغ السلة</button>
+    <button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
+  </section>
+
+  <!-- ✅ المنتجات -->
+  <section class="products">
+     <div class="product">
+      <img src="download.jpg" alt="مفتاح كهرباء">
+      <h3>لقمة مفتاح فينوس</h3>
+      <p>سعر: 20 جنيه</p>
+      <button onclick="addToCart('لقمة مفتاح فينوس', 20)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="shopping (1).webp" alt="لمبة LED">
+      <h3>لقمة بريزة فينوس </h3>
+      <p>سعر: 20 جنيه</p>
+      <button onclick="addToCart('لقمة بريزة فينوس ', 20)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="garas venus.jpeg" alt="لمبة LED">
+      <h3>لقمة جرس فينوس</h3>
+      <p>سعر: 35 جنيه</p>
+      <button onclick="addToCart('لقمة جرس فينوس', 35)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="breza.jpeg" alt="لمبة LED">
+      <h3>لقمة بريزة بتشينو</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('لقمة بريزة  بتشينو', 15)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="moftah.jpeg" alt="لمبة LED">
+      <h3>لقمة مفتاح بتشينو</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('لقمة مفتاح  بتشينو', 15)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="garas.jpeg" alt="لمبة LED">
+      <h3>لقمة جرس بتشينو</h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('لقمة جرس  بتشينو', 15)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download0147.jpg" alt="لمبة LED">
+      <h3>شاسية فينوس</h3>
+      <p>سعر: 13 جنيه</p>
+      <button onclick="addToCart('شاسية فينوس', 13)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="kotsh dakr.jpeg" alt="لمبة LED">
+      <h3>فيشة كوتش دكر</h3>
+      <p>سعر: 7.5 جنيه</p>
+      <button onclick="addToCart('فيشة كوتش دكر', 7.5)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="kotsh netaya.jpeg" alt="لمبة LED">
+      <h3>فيشة كوتش نتاية</h3>
+      <p>سعر: 7.5 جنيه</p>
+      <button onclick="addToCart('فيشة كوتش نتاية', 7.5)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="ahmal dakr.jpeg" alt="لمبة LED">
+      <h3>فيشة احمال دكر 16 امبير </h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('فيشة احمال دكر 16 امبير', 15)">أضف إلى السلة</button>
+    </div>
+    
+    <div class="product">
+      <img src="ahmal netaya.jpeg" alt="لمبة LED">
+      <h3>فيشة احمال نتاية 16 امبير </h3>
+      <p>سعر: 15 جنيه</p>
+      <button onclick="addToCart('فيشة احمال نتاية 16 امبير', 15)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download0132.jpg" alt="لمبة LED">
+      <h3>فيشة دكر ilock</h3>
+      <p>سعر: 30 جنيه</p>
+      <button onclick="addToCart(' فيشة دكر ilock', 30)">أضف إلى السلة</button>
+    </div>
+
+    <div class="product">
+      <img src="download0134.jpg" alt="لمبة LED">
+      <h3>فيشة نتاية ilock</h3>
+      <p>سعر: 30 جنيه</p>
+      <button onclick="addToCart(' فيشة نتاسة ilock', 30)">أضف إلى السلة</button>
+    </div>
+
+
+
+  </section>
+
+  <!-- ✅ سكربت السلة -->
+  <script src="script.js"></script>
+</body>
+</html>
+    

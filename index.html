@@ -172,20 +172,88 @@
   margin-top: 10px;
   cursor: pointer;
 }
-.send-btn:hover {
-  background-color: #1e669b;
+.section-navbar {
+  background-color: #2c3e50;
+  padding: 10px 0;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
+.section-navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.section-navbar li {
+  display: inline-block;
+}
+
+.section-navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.section-navbar a:hover {
+  background-color: #34495e;
+}
+
 
 
 html {
   scroll-behavior: smooth;
 }
 
+ul {
+  list-style: none;       /* يشيل النقط */
+  padding: 0;
+  margin: 0;
+  display: flex;          /* يخليهم في سطر */
+  justify-content: center; /* يخليهم في الوسط */
+  gap: 20px;              /* مسافات بينهم */
+}
+
+li {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+a:hover {
+  color: #f1c40f;
+}
+
+
 
 
   </style>
 </head>
 <body>
+  <nav class="navbar">
+  <ul>
+    <li><a href="index.html">🏠 الرئيسية</a></li>
+    <li><a href="lamps.html">💡 لمبات</a></li>
+    <li><a href="switches.html">🔌 مفاتيح و افياش</a></li>
+  </ul>
+</nav>
+
+
   <header>
     <div style="margin: 20px auto 0 20px; width: fit-content;">
   <input
@@ -377,7 +445,6 @@ html {
       <button onclick="addToCart('لمبة ليد كونايس 16 وات', 60)">أضف إلى السلة</button>
     </div>
 
-    </div>
 
      <div class="product">
       <img src="download012.jpg" alt="لمبة LED">
@@ -394,8 +461,6 @@ html {
       <p>سعر: 30 جنيه</p>
       <button onclick="addToCart(' فيشة دكر ilock', 30)">أضف إلى السلة</button>
     </div>
-
-      </div>
 
      <div class="product">
       <img src="download0134.jpg" alt="لمبة LED">
