@@ -13,11 +13,22 @@
     }
 
     body {
-  background-image: url('al moaz.png ');
-  background-size: cover; /* تغطية كاملة للشاشة */
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url('al moaz.png'); /* ← غيّر لرابط الصورة بتاعتك */
+  background-size: cover;         /* تغطية الشاشة بالكامل */
+  background-position: center;    /* الصورة تتمركز */
+  background-repeat: no-repeat;   /* ما تتكررش */
+  background-attachment: fixed;   /* ثابتة أثناء التمرير */
+  min-height: 100vh;              /* ملء الشاشة */
 }
+
+@media (max-width: 600px) {
+  body {
+    background-size: cover;
+    background-position: center top;
+  }
+}
+
+
 
 
     header {
