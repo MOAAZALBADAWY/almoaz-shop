@@ -44,16 +44,35 @@
     }
 
     #cart-counter {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: #fff;
-      color: #c0392b;
-      border-radius: 20px;
-      padding: 5px 15px;
-      font-weight: bold;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
+  position: relative;
+  background: #fff;
+  color: #c0392b;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.cart-section {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  width: 250px;
+}
+
+.cart-section.active {
+  display: block;
+}
+
 
     .products {
       display: grid;
@@ -157,18 +176,28 @@
   background-color: #1e669b;
 }
 
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
   </style>
 </head>
 <body>
   <header>
   
-  <div id="cart-counter">السلة: 0</div>
-  <section class="cart-section" style="background:none; border:none; padding:0;">
+  <div id="cart-counter" onclick="toggleCart()">السلة: 0</div>
+  <section class="cart-section">
     <ul class="cart-items" id="cart-items"></ul>
     <p class="total" id="total-price">الإجمالي: 0 جنيه</p>
     <button class="clear-btn" onclick="clearCart()">إفراغ السلة</button>
     <button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
   </section>
+
+
+
 </header>
 
 
@@ -187,12 +216,12 @@
       <button onclick="addToCart('لقمة بريزة فينوس ', 20)">أضف إلى السلة</button>
     </div>
 
-    <!--<div class="product">
+    <div class="product">
       <img src="garas venus.jpeg" alt="لمبة LED">
       <h3>لقمة جرس فينوس</h3>
-      <p>سعر: 15 جنيه</p>
-      <button onclick="addToCart('لقمة بريزة  بتشينو', 15)">أضف إلى السلة</button>
-    </div>-->
+      <p>سعر: 35 جنيه</p>
+      <button onclick="addToCart('لقمة جرس فينوس', 35)">أضف إلى السلة</button>
+    </div>
 
 
     <div class="product">
@@ -389,6 +418,12 @@
     updateCartUI();
     // alert(`تم إضافة ${name} إلى السلة!`); ← تم إزالتها
   }
+
+  function toggleCart() {
+  const cartSection = document.querySelector(".cart-section");
+  cartSection.classList.toggle("active");
+}
+
 
   function clearCart() {
     cart = [];
