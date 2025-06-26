@@ -71,3 +71,5 @@ function sendOrder() {
 }
 
 window.onload = updateCartUI;
+
+

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+  <title>البحث عن المنتجات</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background: #f1f1f1;
+      margin: 0;
+      padding: 20px;
+      text-align: right;
+    }
+
+    body {
+  background-image: url('al moaz2.png'); /* ← غيّر لرابط الصورة بتاعتك */
+  background-size: cover;         /* تغطية الشاشة بالكامل */
+  background-position: center;    /* الصورة تتمركز */
+  background-repeat: no-repeat;   /* ما تتكررش */
+  background-attachment: fixed;   /* ثابتة أثناء التمرير */
+  min-height: 100vh;              /* ملء الشاشة */
+}
+
+    #search-box {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .product {
+      background: #fff;
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .product h3 {
+      margin: 0 0 10px;
+      color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" id="search-box" placeholder="ابحث عن منتج..." oninput="searchProducts()">
+  <div id="search-results"></div>
+
+  <script>
+    const allProducts = [
+      { name: "لقمة مفتاح فينوس", category: "مفاتيح", price: 20 },
+      { name: "لقمة بريزة فينوس", category: "مفاتيح", price: 20 },
+      { name: "لقمة جرس فينوس", category: "مفاتيح", price: 35 },
+      { name: "لقمة بريزة بتشينو", category: "مفاتيح", price: 15 },
+      { name: "لقمة مفتاح بتشينو", category: "مفاتيح", price: 15 },
+      { name: "لقمة جرس بتشينو", category: "مفاتيح", price: 15 },
+      { name: "شاسية فينوس", category: "مفاتيح", price: 13 },
+      { name: "فيشة كوتش دكر", category: "أدوات", price: 7.5 },
+      { name: "فيشة كوتش نتاية", category: "أدوات", price: 7.5 },
+      { name: "فيشة احمال دكر 16 امبير", category: "أدوات", price: 15 },
+      { name: "فيشة احمال نتاية 16 امبير", category: "أدوات", price: 15 },
+      { name: "فيشة دكر ilock", category: "أدوات", price: 30 },
+      { name: "فيشة نتاسة ilock", category: "أدوات", price: 30 },
+      { name: "لمبة ليد فينوس 12 وات", category: "لمبات", price: 75 },
+      { name: "لمبة ليد فينوس 9 وات", category: "لمبات", price: 65 },
+      { name: "لمبة ليد اسبرنت 9 وات", category: "لمبات", price: 35 },
+      { name: "لمبة ليد اليوس 12 وات", category: "لمبات", price: 80 },
+      { name: "لمبة ليد اليوس 9 وات", category: "لمبات", price: 65 },
+      { name: "لمبة ليد ليون 68 وات", category: "لمبات", price: 90 },
+      { name: "لمبة ليد كليكن 9 وات", category: "لمبات", price: 15 },
+      { name: "لمبة ليد كليكن 12 وات", category: "لمبات", price: 20 },
+      { name: "لمبة ليد كليكن 35 وات", category: "لمبات", price: 45 },
+      { name: "لمبة ليد كليكن 45 وات", category: "لمبات", price: 60 },
+      { name: "لمبة ليد كونايس 12 وات", category: "لمبات", price: 40 },
+      { name: "لمبة ليد كونايس 16 وات", category: "لمبات", price: 60 },
+      { name: "لمبة ليد كونايس 40 وات", category: "لمبات", price: 120 }
+    ];
+
+    function searchProducts() {
+      const input = document.getElementById("search-box").value.toLowerCase();
+      const resultsDiv = document.getElementById("search-results");
+
+      const matched = allProducts.filter(p => p.name.toLowerCase().includes(input));
+
+      resultsDiv.innerHTML = matched.map(p =>
+        `<div class="product">
+           <h3>${p.name}</h3>
+           <p>السعر: ${p.price} جنيه</p>
+         </div>`
+      ).join("");
+
+      if (matched.length === 0) {
+        resultsDiv.innerHTML = "<p>لا توجد نتائج مطابقة.</p>";
+      }
+    }
+  </script>
+
+</body>
+</html>
