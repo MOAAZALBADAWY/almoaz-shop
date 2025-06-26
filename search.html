@@ -3,18 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css" />
   <title>البحث عن المنتجات</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      background: #f1f1f1;
-      margin: 0;
-      padding: 20px;
-      text-align: right;
-    }
-
-    body {
+     body {
   background-image: url('al moaz2.png'); /* ← غيّر لرابط الصورة بتاعتك */
   background-size: cover;         /* تغطية الشاشة بالكامل */
   background-position: center;    /* الصورة تتمركز */
@@ -23,17 +15,24 @@
   min-height: 100vh;              /* ملء الشاشة */
 }
 
+@media (max-width: 600px) {
+  body {
+    background-size: cover;
+    background-position: center top;
+  }
+}
+
     #search-box {
       width: 100%;
       padding: 12px;
       font-size: 16px;
-      border: 1px solid #ccc;
+      border: 1px solid #cccccc;
       border-radius: 5px;
       margin-bottom: 20px;
     }
 
     .product {
-      background: #fff;
+      background: #ffffff;
       margin-bottom: 15px;
       padding: 15px;
       border-radius: 8px;
@@ -44,11 +43,101 @@
       margin: 0 0 10px;
       color: #c0392b;
     }
+
+    .product button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background-color: #219150;
+    }
+
+    #cart-counter {
+  position: relative;
+  background: #fff;
+  color: #c0392b;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.cart-section {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  width: 250px;
+}
+
+.cart-section.active {
+  display: block;
+}
+
+    .cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart-items li {
+      padding: 8px 0;
+      border-bottom: 1px dashed #ccc;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .clear-btn, .send-btn {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .send-btn {
+      background-color: #27ae60;
+    }
   </style>
 </head>
 <body>
+<nav class="navbar">
+    <ul>
+      <li><a href="index.html">🏠 الرئيسية</a></li>
+      <li><a href="lamps.html">💡 لمبات</a></li>
+      <li><a href="switches.html">🔌 مفاتيح</a></li>
+      <li><a href="search.html">🔍بحث</a></li>
+    </ul>
+  </nav>
 
   <input type="text" id="search-box" placeholder="ابحث عن منتج..." oninput="searchProducts()">
+  <div id="cart-counter" onclick="toggleCart()">🛒 السلة: 0</div>
+
+  <section class="cart-section">
+    <ul class="cart-items" id="cart-items"></ul>
+    <p class="total" id="total-price">الإجمالي: 0 جنيه</p>
+    <button class="clear-btn" onclick="clearCart()">إفراغ السلة</button>
+    <button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
+  </section>
+
   <div id="search-results"></div>
 
   <script>
@@ -81,6 +170,83 @@
       { name: "لمبة ليد كونايس 40 وات", category: "لمبات", price: 120 }
     ];
 
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function updateCartUI() {
+      const cartItems = document.getElementById("cart-items");
+      const totalPrice = document.getElementById("total-price");
+      const counter = document.getElementById("cart-counter");
+
+      cartItems.innerHTML = "";
+      let total = 0;
+      let itemsMap = {};
+
+      cart.forEach(item => {
+        if (itemsMap[item.name]) {
+          itemsMap[item.name].count++;
+        } else {
+          itemsMap[item.name] = { count: 1, price: item.price };
+        }
+        total += item.price;
+      });
+
+      for (let name in itemsMap) {
+        const li = document.createElement("li");
+        let entry = itemsMap[name];
+        li.textContent = `${entry.count} × ${name} - ${entry.price * entry.count} جنيه`;
+        cartItems.appendChild(li);
+      }
+
+      totalPrice.textContent = `الإجمالي: ${total} جنيه`;
+      counter.textContent = `🛒 السلة: ${cart.length}`;
+    }
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function toggleCart() {
+      const cartSection = document.querySelector(".cart-section");
+      cartSection.classList.toggle("active");
+    }
+
+    function clearCart() {
+      cart = [];
+      localStorage.removeItem("cart");
+      updateCartUI();
+    }
+
+    function sendOrder() {
+      if (cart.length === 0) {
+        alert("السلة فارغة!");
+        return;
+      }
+
+      let itemsMap = {};
+      cart.forEach(item => {
+        if (itemsMap[item.name]) {
+          itemsMap[item.name].count++;
+        } else {
+          itemsMap[item.name] = { count: 1, price: item.price };
+        }
+      });
+
+      let message = "طلب جديد من العميل:\n";
+      for (let name in itemsMap) {
+        let entry = itemsMap[name];
+        message += `- ${entry.count} × ${name} (${entry.price} جنيه)\n`;
+      }
+
+      let total = cart.reduce((sum, item) => sum + item.price, 0);
+      message += `\nالإجمالي: ${total} جنيه`;
+
+      let phone = "201228408475";
+      let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
     function searchProducts() {
       const input = document.getElementById("search-box").value.toLowerCase();
       const resultsDiv = document.getElementById("search-results");
@@ -91,6 +257,7 @@
         `<div class="product">
            <h3>${p.name}</h3>
            <p>السعر: ${p.price} جنيه</p>
+           <button onclick="addToCart('${p.name}', ${p.price})">أضف إلى السلة</button>
          </div>`
       ).join("");
 
@@ -98,7 +265,8 @@
         resultsDiv.innerHTML = "<p>لا توجد نتائج مطابقة.</p>";
       }
     }
-  </script>
 
+    window.onload = updateCartUI;
+  </script>
 </body>
 </html>
