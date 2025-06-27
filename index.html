@@ -382,14 +382,14 @@ a:hover {
   <script>
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  function updateCartUI() {
+function updateCartUI() {
   const cartItems = document.getElementById("cart-items");
   const totalPrice = document.getElementById("total-price");
   const counter = document.getElementById("cart-counter");
-  cartSection.classList.toggle("active");
 
   cartItems.innerHTML = "";
   let total = 0;
+  const grouped = {};
 
   // إنشاء خريطة للمنتجات المتكررة
   let itemsMap = {};
