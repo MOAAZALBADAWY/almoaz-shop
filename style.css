@@ -110,22 +110,13 @@ body, html {
 .cart-section {
   display: none;
   position: absolute;
-<<<<<<< HEAD
   right: 20px;     /* قربها من اليمين */
   top: 120px;      /* نزّل السلة لتحت */
-=======
-  right: 20px;
-  top: 60px;
->>>>>>> parent of 3125c94 (ءيس)
   background-color: white;
   color: black;
   padding: 10px;
   border-radius: 10px;
-<<<<<<< HEAD
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-=======
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
->>>>>>> parent of 3125c94 (ءيس)
   z-index: 999;
   width: 250px;
 }
