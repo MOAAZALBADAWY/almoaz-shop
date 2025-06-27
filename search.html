@@ -81,6 +81,7 @@
   z-index: 1000;
 }
 
+<<<<<<< HEAD
 .navbar {
   background-color: #2c3e50;
   padding: 10px 0;
@@ -127,6 +128,21 @@
       border-radius: 10px;
     }
     
+=======
+.cart-section {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  width: 250px;
+}
+>>>>>>> parent of 3125c94 (ءيس)
 
 .cart-section.active {
   display: block;
@@ -173,10 +189,10 @@
   </nav>
 
   <input type="text" id="search-box" placeholder="ابحث عن منتج..." oninput="searchProducts()">
+  <div id="cart-counter" onclick="toggleCart()">🛒 السلة: 0</div>
 
- <div id="cart-counter" onclick="toggleCart()">🛒 السلة: 0</div>
-  <section class="cart-section" id="cart-section">
-    <ul id="cart-items" class="cart-items"></ul>
+  <section class="cart-section">
+    <ul class="cart-items" id="cart-items"></ul>
     <p class="total" id="total-price">الإجمالي: 0 جنيه</p>
     <button class="clear-btn" onclick="clearCart()">إفراغ السلة</button>
     <button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
